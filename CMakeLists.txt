@@ -6,6 +6,8 @@ cmake_minimum_required (VERSION 3.8)
 project ("CentralControlClientDemo")
 
 # 将源代码添加到此项目的可执行文件。
-add_executable (CentralControlClientDemo "CentralControlClientDemo.cpp" "CentralControlClientDemo.h")
+include_directories("/usr/local/include" "." "/include")
+
+add_executable (CentralControlClientDemo "src/CentralControlClientDemo.cpp" "include/CentralControlClientDemo.h")
 
 # TODO: 如有需要，请添加测试并安装目标。
