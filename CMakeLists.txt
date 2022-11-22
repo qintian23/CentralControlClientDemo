@@ -21,6 +21,11 @@ file(GLOB_RECURSE SRC_DIR_LIST "src/*.cpp")
 
 message(STATUS "SRC_DIR_LIST = ${SRC_DIR_LIST}")
 
+include_directories(
+	${INCLUDE_DIR_LIST}
+)
+
+
 add_executable (CentralControlClientDemo "include\CentralControlClientDemo.h" "src\CentralControlClientDemo.cpp")
 
 
