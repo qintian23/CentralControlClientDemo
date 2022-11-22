@@ -1,11 +1,26 @@
-﻿# CMakeList.txt: CMakeTest 的 CMake 项目，在此处包括源代码并定义
-# 项目特定的逻辑。
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.8)
 
 project ("CentralControlClientDemo")
 
-# 将源代码添加到此项目的可执行文件。
+macro(FIND_INCLUDE_DIR result curdir)
+	file(GLOB_RECURSE children "${curdir}/*.h" "${curdir}/*.hpp")
+	message(STATUS "children = ${children}")
+	set(dirlist "")
+	foreach(child ${children})
+		string(REGEX REPLACE "(.*)/.*" "\\1" LIB_NAME ${child})
+		if(IS_DIRECTORY ${LIB_NAME})
+			LIST(APPEND dirlist ${LIB_NAME})
+		endif()
+	endforeach()
+	set(${result} ${dirlist})
+endmacro()
+
+FIND_INCLUDE_DIR(INCLUDE_DIR_LIST ${PROJECT_SOURCE_DIR}/include)
+
+file(GLOB_RECURSE SRC_DIR_LIST "src/*.cpp")
+
+message(STATUS "SRC_DIR_LIST = ${SRC_DIR_LIST}")
+
 add_executable (CentralControlClientDemo "include\CentralControlClientDemo.h" "src\CentralControlClientDemo.cpp")
 
-# TODO: 如有需要，请添加测试并安装目标。
+
